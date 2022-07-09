@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@SecondaryTable(name = "departments")
 public class Worker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +23,9 @@ public class Worker {
     private double salary;
 
     @OneToOne
+    @JoinColumn(name = "id_car")
     private Car car;
+
+    @Column(table = "departments", name = "name")
+    private String departmentName;
 }
