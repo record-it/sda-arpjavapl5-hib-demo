@@ -61,7 +61,7 @@ public class GenericDao<T> {
     public List<T> findAll(){
         final EntityManager em = this.factory.createEntityManager();
         String className = clazz.getSimpleName();
-        final List<T> list = em.createQuery("select c from " + className + " c", clazz).getResultList();
+        final List<T> list = em.createQuery("from " + className, clazz).getResultList();
         em.close();
         return list;
     }

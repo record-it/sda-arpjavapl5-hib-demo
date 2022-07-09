@@ -42,5 +42,14 @@ public class GenericDaoDemoApp {
         bookDao.findAll().forEach(System.out::println);
         System.out.println("*********************");
         carDao.findPriceGreater(new BigDecimal("40000")).forEach(System.out::println);
+        System.out.println("*********************");
+        bookDao.findPublishedInYear(2000).forEach(System.out::println);
+        System.out.println("*********************");
+        carDao.findAllModels().forEach(System.out::println);
+        //carDao.findAveragePricePerModel();
+        System.out.println("*********************");
+        carDao.findAboveAveragePrice().forEach(System.out::println);
+        System.out.println("*********************");
+        bookDao.findCountByEditionYear().forEach(System.out::println);
     }
 }
