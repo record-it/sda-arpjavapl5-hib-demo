@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 public class GenericDao<T> {
-    private final EntityManagerFactory factory;
+    protected final EntityManagerFactory factory;
 
     private final Class<T> clazz;
 

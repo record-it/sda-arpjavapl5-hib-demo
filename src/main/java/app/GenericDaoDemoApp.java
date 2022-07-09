@@ -1,7 +1,7 @@
 package app;
 
+import dao.CarDao;
 import dao.GenericDao;
-import entity.Book;
 import entity.Car;
 
 import javax.persistence.Persistence;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class GenericDaoDemoApp {
     public static void main(String[] args) {
-        GenericDao<Car> carDao = new GenericDao<>(Persistence.createEntityManagerFactory("hib-demo"), Car.class);
+        CarDao carDao = new CarDao(Persistence.createEntityManagerFactory("hib-demo"), Car.class);
 //        Car car = new Car();
 //        car.setModel("Dao model");
 //        car.setAvailable(true);
@@ -35,5 +35,7 @@ public class GenericDaoDemoApp {
             updateCar.setPrice(new BigDecimal("400000"));
             carDao.update(updateCar.getId(), updateCar);
         }
+        carDao.findAll().forEach(System.out::println);
+
     }
 }
