@@ -1,7 +1,9 @@
 package app;
 
+import dao.BookDao;
 import dao.CarDao;
 import dao.GenericDao;
+import entity.Book;
 import entity.Car;
 
 import javax.persistence.Persistence;
@@ -17,7 +19,7 @@ public class GenericDaoDemoApp {
 //        car.setPower(1000);
 //        carDao.insert(car);
         //Zadeklaruj bookDao i dodaj książkę
-//        GenericDao<Book> bookDao = new GenericDao<>(Persistence.createEntityManagerFactory("hib-demo"), clazz);
+        BookDao bookDao = new BookDao(Persistence.createEntityManagerFactory("hib-demo"), Book.class);
 //        Book book = new Book("Title dao", "Author dao", 2000);
 //        bookDao.insert(book);
         final Car car = carDao.find(4);
@@ -36,6 +38,9 @@ public class GenericDaoDemoApp {
             carDao.update(updateCar.getId(), updateCar);
         }
         carDao.findAll().forEach(System.out::println);
-
+        System.out.println("*********************");
+        bookDao.findAll().forEach(System.out::println);
+        System.out.println("*********************");
+        carDao.findPriceGreater(new BigDecimal("40000")).forEach(System.out::println);
     }
 }

@@ -1,10 +1,12 @@
 package dao;
 
+import entity.Book;
 import entity.Car;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
 public class GenericDao<T> {
     protected final EntityManagerFactory factory;
@@ -54,5 +56,13 @@ public class GenericDao<T> {
         }
         em.getTransaction().commit();
         em.close();
+    }
+
+    public List<T> findAll(){
+        final EntityManager em = this.factory.createEntityManager();
+        String className = clazz.getSimpleName();
+        final List<T> list = em.createQuery("select c from " + className + " c", clazz).getResultList();
+        em.close();
+        return list;
     }
 }
