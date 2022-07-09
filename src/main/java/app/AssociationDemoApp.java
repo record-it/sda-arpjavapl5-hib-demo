@@ -10,6 +10,10 @@ import java.sql.Timestamp;
 
 public class AssociationDemoApp {
     public static void main(String[] args) {
+        GenericDao<Tool> tools = new GenericDao<>(
+                Persistence.createEntityManagerFactory("hib-demo"),
+                Tool.class
+        );
         GenericDao<Person> persons =
                 new GenericDao<>(Persistence.createEntityManagerFactory("hib-demo"), Person.class);
         final Person person = Person
@@ -83,6 +87,17 @@ public class AssociationDemoApp {
                         .car(null)
                         .build()
         );
+        tools.insert(
+                Tool
+                        .builder()
+                        .name("młotek")
+                        .worker(workers.find(1))
+                        .build()
+        );
+        Worker entity = workers.find(1);
+        entity.getTools().add(Tool.builder().name("świder").build());
+        workers.update(entity.getId(), entity);
+        System.out.println(workers.find(1));
 
     }
 }

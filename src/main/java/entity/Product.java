@@ -4,11 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+public class Product extends AbstractEntity{
     @Column(nullable = false, length = 100)
     private String name;
 

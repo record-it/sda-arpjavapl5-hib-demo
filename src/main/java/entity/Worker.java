@@ -3,6 +3,8 @@ package entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "workers")
@@ -10,14 +12,9 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @SecondaryTable(name = "departments")
-public class Worker {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+public class Worker extends AbstractEntity{
     private String position;
 
     private double salary;
@@ -28,4 +25,16 @@ public class Worker {
 
     @Column(table = "departments", name = "name")
     private String departmentName;
+
+    @OneToMany(mappedBy = "worker", fetch = FetchType.EAGER)
+    private List<Tool> tools = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        String toolString = "";
+        for (Tool tool: tools) {
+            toolString += tool.getName() + ", ";
+        }
+        return position +", " + salary + ", " + departmentName +", tools: " + toolString;
+    }
 }
