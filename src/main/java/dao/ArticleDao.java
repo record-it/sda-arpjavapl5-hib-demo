@@ -36,4 +36,10 @@ public class ArticleDao extends GenericDao<Article> {
         return tags;
     }
 
+    public List<Article> findAllByTagProgramming(){
+        EntityManager em = factory.createEntityManager();
+        final List<Article> articles = em.createNamedQuery("programming", Article.class).getResultList();
+        em.close();
+        return articles;
+    }
 }

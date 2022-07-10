@@ -186,5 +186,7 @@ public class AssociationDemoApp {
 
         final List<Author> authorList = articleDao.findAllAuthorsForArticleWithTitle("Hibernate");
         authorList.forEach(System.out::println);
+
+        articleDao.findAllByTagProgramming().forEach(System.out::println);
     }
 }

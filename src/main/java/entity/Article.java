@@ -2,10 +2,7 @@ package entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @ToString
+@NamedQuery(name = "programming", query = "select a from Article a join a.tags t where t.name = 'Programming'")
 public class Article extends AbstractEntity {
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
