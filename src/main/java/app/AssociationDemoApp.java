@@ -12,6 +12,10 @@ import java.util.HashSet;
 
 public class AssociationDemoApp {
 
+    private static final GenericDao<Author> authors = new GenericDao<>(
+            Persistence.createEntityManagerFactory("hib-demo"),
+            Author.class
+    );
     private static final GenericDao<Tool> tools = new GenericDao<>(
             Persistence.createEntityManagerFactory("hib-demo"),
             Tool.class
@@ -145,6 +149,7 @@ public class AssociationDemoApp {
                 .builder()
                 .tags(new HashSet<>())
                 .title("Hibernate")
+                .authors(new HashSet<>())
                 .build();
         //tworzymy encję tagu
         final Tag tag = Tag
@@ -162,9 +167,12 @@ public class AssociationDemoApp {
         tags.insert(newTag);
         article.getTags().add(newTag);
         //robimy update encji nadrzędnej - artykułu
+        //Dodanie autora
+        Author author = Author.builder().name("Bloch").email("bloch@java.org").build();
+        authors.insert(author);
+        article.getAuthors().add(author);
         articles.update(article.getId(), article);
         final Article article1 = articles.find(1L);
         System.out.println(article1.getTags());
-
     }
 }
