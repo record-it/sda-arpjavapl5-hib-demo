@@ -1,5 +1,6 @@
 package app;
 
+import dao.ArticleDao;
 import dao.CarDao;
 import dao.GenericDao;
 import entity.*;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class AssociationDemoApp {
 
@@ -33,6 +35,10 @@ public class AssociationDemoApp {
             Article.class
     );
 
+    private static final ArticleDao articleDao = new ArticleDao(
+            Persistence.createEntityManagerFactory("hib-demo"),
+            Article.class
+    );
     private static final GenericDao<Tag> tags = new GenericDao<>(
             Persistence.createEntityManagerFactory("hib-demo"),
             Tag.class
@@ -174,5 +180,11 @@ public class AssociationDemoApp {
         articles.update(article.getId(), article);
         final Article article1 = articles.find(1L);
         System.out.println(article1.getTags());
+
+        final List<Tag> tagList = articleDao.findAllTagsForArticlesWithTitle("Hibernate");
+        tagList.forEach(System.out::println);
+
+        final List<Author> authorList = articleDao.findAllAuthorsForArticleWithTitle("Hibernate");
+        authorList.forEach(System.out::println);
     }
 }

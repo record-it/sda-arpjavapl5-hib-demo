@@ -14,11 +14,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(callSuper = true)
 public class Author extends AbstractEntity{
     private String email;
 
     private String name;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "authors")
     private Set<Article> articles;
 }

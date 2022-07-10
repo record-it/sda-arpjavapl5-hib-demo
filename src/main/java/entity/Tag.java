@@ -19,4 +19,9 @@ public class Tag extends AbstractEntity{
 
     @ManyToMany(mappedBy = "tags")
     private Set<Article> articles;
+
+    @Override
+    public String toString() {
+        return String.format("Tag {id: %d name: %s}", getId(), name);
+    }
 }
