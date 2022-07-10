@@ -26,7 +26,7 @@ public class Worker extends AbstractEntity{
     @Column(table = "departments", name = "name")
     private String departmentName;
 
-    @OneToMany(mappedBy = "worker", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "worker", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Tool> tools = new ArrayList<>();
 
     @Override

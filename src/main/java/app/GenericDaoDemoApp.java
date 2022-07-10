@@ -51,5 +51,11 @@ public class GenericDaoDemoApp {
         carDao.findAboveAveragePrice().forEach(System.out::println);
         System.out.println("*********************");
         bookDao.findCountByEditionYear().forEach(System.out::println);
+        System.out.println("**********************");
+        bookDao.insert(Book.builder().author("Bloch").title("Java").editionYear(2000).build());
+        bookDao.insert(Book.builder().author("Bloch").title("Hibernate").editionYear(2001).build());
+        bookDao.insert(Book.builder().author("Freeman").title("C#").editionYear(2006).build());
+        bookDao.insert(Book.builder().author("Freeman").title("Asp.NET").editionYear(2000).build());
+        bookDao.insert(Book.builder().author("Stock").title("Jdbc").editionYear(2002).build());
     }
 }

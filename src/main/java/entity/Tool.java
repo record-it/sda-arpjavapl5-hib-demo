@@ -2,6 +2,7 @@ package entity;
 
 import lombok.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,7 +17,6 @@ import javax.persistence.ManyToOne;
 public class Tool extends AbstractEntity{
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "worker_id", nullable = true)
+    @ManyToOne(targetEntity = Worker.class)
     private Worker worker;
 }
